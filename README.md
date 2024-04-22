@@ -1,11 +1,28 @@
-# neverWriteByHand
-## 使用方法
+# neverWriteByHand v2.0
 
-1.挑选汉字手写字体 http://www.foundertype.com 
+![效果展示]()
 
-2.将挑选的ttf字体文件改名为test.TTF移至文件目录用于生成图片
+本项目在 [https://github.com/SAI-24-me/neverWriteByHand](https://github.com/SAI-24-me/neverWriteByHand) 基础上二次开发。
 
-3.设置word2pic.py参数
+新增了以下功能：
 
-# 结果展示
-![img](https://github.com/SAI-24-me/neverWriteByHand/blob/master/img/test.jpg)
+1. 代码优化
+2. 新增 `requirement.txt` 
+3. 多字体生成
+
+# 使用方法
+
+1. 安装环境
+```shell
+pip install -r requirement.txt
+```
+
+2. 在 [方正字库官网](http://www.foundertype.com) 挑选汉字手写字体
+
+3. 将下载的 ttf 字体文件存放至 `fonts` 目录
+
+4. 将需要转手写的文字写进 `content.txt`
+
+5. 执行程序：`python main.py`
+
+6. 生成的图片将会存放在 `output` 目录中
