@@ -6,7 +6,7 @@
 >
 > 1. 代码优化
 > 2. 新增 `requirement.txt` 
-> 3. 多字体同步生成
+> 3. 支持在网页端输入文字转换
 
 # 使用方法
 
@@ -19,11 +19,9 @@ pip install -r requirement.txt
 
 3. 将下载的 ttf 字体文件存放至 `fonts` 目录
 
-4. 将需要转手写的文字写进 `content.txt`
+4. 执行程序：`python main.py`
 
-5. 执行程序：`python main.py`
-
-6. 生成的图片将会存放在 `output` 目录中
+5. 生成的图片将会存放在 `output` 目录中
 
 # 效果展示
 
