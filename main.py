@@ -4,10 +4,11 @@ import io
 from PIL import ImageFont, Image, ImageDraw
 from flask import Flask, request, render_template
 
-app = Flask(__name__, template_folder="docs")
+app = Flask(__name__, template_folder="static")
 
 size = 4  # 整齐度
-font_path = r"fonts/STLITI.TTF"
+font_path = r"fonts/STLITI.TTF"     # 字体文件
+background_path = r"static/background.png"  # 背景图片
 
 
 def generate_image(size, content, ttf_path):
@@ -16,7 +17,7 @@ def generate_image(size, content, ttf_path):
     LENGSTR = len(content)
     FLAG = 0
 
-    img = Image.open("background.png")  # 背景图片
+    img = Image.open(background_path)  # 背景图片
     draw = ImageDraw.Draw(img)
 
     while FLAG < LENGSTR:
