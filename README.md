@@ -23,10 +23,8 @@ pip install -r requirements.txt
 
 5. 访问 `http://localhost:5000`
 
-6. 生成的图片将会存放在 `output` 目录中
-
 ## 效果展示
 
-![webUI](https://github.com/danielchan-25/neverWriteByHand-v2.0/blob/main/output/webUI.png)
+![webUI](https://github.com/danielchan-25/neverWriteByHand-v2.0/blob/main/static/webUI.png)
 
-![效果展示](https://github.com/danielchan-25/neverWriteByHand-v2.0/blob/main/output/1713765887.png)
+![效果展示](https://github.com/danielchan-25/neverWriteByHand-v2.0/blob/main/static/text.png)
