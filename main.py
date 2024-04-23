@@ -1,32 +1,25 @@
-import os
 import random
-import time
+import base64
+import io
 from PIL import ImageFont, Image, ImageDraw
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template
 
-app = Flask(__name__, template_folder="static")
+app = Flask(__name__, template_folder="docs")
 
-SIZE = 4  # 整齐度
-FONT_PATH = r"fonts/"
-SAVE_PATH = r"output/"
-
-
-# 获取文字内容
-def get_content(txt_path):
-    with open(txt_path, "r", encoding="UTF-8") as f:
-        content = f.read()
-    return content
+size = 4  # 整齐度
+font_path = r"fonts/STLITI.TTF"
 
 
-def generate_image(size, content, ttf_path, save_path):
+def generate_image(size, content, ttf_path):
     FONT = ImageFont.truetype(ttf_path, 25)  # 设置字体
 
     LENGSTR = len(content)
     FLAG = 0
 
+    img = Image.open("background.png")  # 背景图片
+    draw = ImageDraw.Draw(img)
+
     while FLAG < LENGSTR:
-        img = Image.open("background.png")
-        draw = ImageDraw.Draw(img)
         for i in range(28):
             for j in range(38):
                 if FLAG >= LENGSTR:
@@ -40,23 +33,24 @@ def generate_image(size, content, ttf_path, save_path):
                 FLAG += 1
             if FLAG >= LENGSTR:
                 break
-        img_path = os.path.join(save_path, f"{int(time.time())}.png")
-        img.save(img_path)
-    return img_path
+
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format="PNG")
+    img_byte_arr.seek(0)
+
+    img_base64 = base64.b64encode(img_byte_arr.getvalue())
+    return img_base64
 
 
 @app.route("/", methods=["GET", "POST"])
 def main():
     if request.method == "POST":
         user_input = request.form["content"]
-        img_path = generate_image(size=SIZE, content=user_input,
-                                  ttf_path=os.path.join(FONT_PATH, "STLITI.TTF"),
-                                  save_path=SAVE_PATH
-                                  )
-        return send_file(img_path, mimetype="image/png")
+        img_base64 = generate_image(size=size, content=user_input, ttf_path=font_path)
+        return f"<img src='data:image/png;base64,{img_base64.decode('utf-8')}'/>"
     else:
         return render_template("index.html")
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5001)
+    app.run(debug=True, host="0.0.0.0", port=5000)
